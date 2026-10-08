@@ -13,7 +13,7 @@ public:
 	std::string GetModel();
 	std::string GetColor();
 	int GetYear();
-	int GetReservations(); //this should output a pointer to the array? outputs each specific date that has a reservation //CHECK if the car date already exists
+	int* GetReservations(); //this should output a pointer to the array? outputs each specific date that has a reservation //CHECK if the car date already exists
 	void SetMake(std::string newMake);
 	void SetModel(std::string newModel);
 	void SetColor(std::string newColor);

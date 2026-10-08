@@ -2,24 +2,24 @@
 #include <iostream>
 #include "ElectricVehicle.h"
 double ElectricVehicle::GetCapacity() {
-	return ElectricVehicle::Capacity;
+	return Capacity;
 }
 double ElectricVehicle::GetEfficiency() {
-	return ElectricVehicle::Efficiency;
+	return Efficiency;
 }
 void ElectricVehicle::SetCapacity(double newC) {
-	ElectricVehicle::Capacity = newC;
+	Capacity = newC;
 }
 void ElectricVehicle::SetEfficiency(double newEff) {
-	ElectricVehicle::Efficiency = newEff;
+	Efficiency = newEff;
 }
 std::string ElectricVehicle::GetType() {
-	return ElectricVehicle::Type; //this will always be "EV"
+	return Type; //this will always be "EV"
 }
 void ElectricVehicle::SetType(std::string newType) {
-	ElectricVehicle::Type = newType; //this SHOULD always be "EV"
+	Type = newType; //this SHOULD always be "EV"
 }
 std::string ElectricVehicle::InfoOut() { //outputs specific information about the vehicle in string format
 	std::string Range = std::to_string(Capacity * Efficiency);
-	return "Propulsion Method: Electric\nRange: " + Range + "\nEfficency: " + std::to_string(ElectricVehicle::Efficiency) + "\n";
+	return "Propulsion Method: Electric\nRange: " + Range + "\nEfficency: " + std::to_string(Efficiency) + "\n";
 }

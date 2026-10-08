@@ -3,32 +3,34 @@
 #include "Vehicle.h"
 //definitions for Vehicle
 std::string Vehicle::GetMake() {
-	return Vehicle::Make;
+	return Make;
 }
 std::string Vehicle::GetModel() {
-	return Vehicle::Model;
+	return Model;
 }
 std::string Vehicle::GetColor() {
-	return Vehicle::Color;
+	return Color;
 }
 int Vehicle::GetYear() {
-	return Vehicle::Year;
+	return Year;
 }
-int GetReservations();
+int* Vehicle::GetReservations() {
+	return Reservations;
+}
 void Vehicle::SetMake(std::string newMake) {
-	Vehicle::Make = newMake;
+	Make = newMake;
 }
 void Vehicle::SetModel(std::string newModel) {
-	Vehicle::Model = newModel;
+	Model = newModel;
 }
 void Vehicle::SetColor(std::string newColor) {
-	Vehicle::Color = newColor;
+	Color = newColor;
 }
 void Vehicle::SetYear(int newYear) {
-	Vehicle::Year = newYear;
+	Year = newYear;
 }
 int Vehicle::AddReservation(int newDate) {
-	for (int lcv; lcv < 3; lcv++) {
+	for (int lcv = 0; lcv < 3; lcv++) {
 		if (Reservations[lcv] == newDate) { //if the date has already been reserved
 			return 1; //this reservation is already in the system
 		}
@@ -40,7 +42,7 @@ int Vehicle::AddReservation(int newDate) {
 	return 2; //there are no available slots.
 }
 int Vehicle::DeleteReservation(int oldDate) {
-	for (int lcv; lcv < 3; lcv++) {
+	for (int lcv = 0; lcv < 3; lcv++) {
 		if (Reservations[lcv] == oldDate) {
 			Reservations[lcv] = 0;
 			return 0; //succeeded without issue
