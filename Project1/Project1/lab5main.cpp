@@ -4,7 +4,7 @@
 // represents a single vehicle where there are six fields: Make, Model, Year,
 // Engine Type (ICE or EV), Fuel/Energy Capacity, and mileage efficiency.
 // The user is allowed to querry the database to see the list of vehicles that
-// match their search criteria.
+// match their search criteria. YAY
 ///////////////////////////////////////////////////////////////////////////////
 #include <iostream>
 #include <fstream>
