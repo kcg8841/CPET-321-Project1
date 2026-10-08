@@ -20,10 +20,11 @@ int main(int argc, char* argv[])
    // The string for each line of the inventory file
    std::string Line;
    // The used car database as pointers to objects
-   #define DATABASE_SIZE (20)
+   #define DATABASE_SIZE (50) //Please note, This was changed from lab 5.
    Vehicle* Database[DATABASE_SIZE];
 
    // Open the output file
+   //this should be opening the database file, not inventory.txt. OR!!!!!!!!!!!! We could have database output to Inventory.txt?
    InFile.open("Inventory.txt");
    if (!InFile.is_open())
      {
