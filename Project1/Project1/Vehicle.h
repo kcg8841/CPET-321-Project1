@@ -31,21 +31,6 @@ public:
 	
 	virtual std::string InfoOut() = 0; //outputs information about the vehicle
 
-
-	//methods  anmd variables I believe should be added:
-	//a variable that tracks each day thata car is reserved. This SHOULD only be an int, as it seems like only 1 reservation can be tracked at a time. WRONG
-	//this variable should be an array of int size 3
-	//a way to access and change reservation status. duh
-	//I need to keep track of the current day, not sure if that should be a job for my classes though
-	// the date the program starts running is 1.
-
-	//ADD a color for the car done
-	//
-
-	//add to infouout:
-	//color
-	//resrervation datses?
-
 };
 
 #endif
