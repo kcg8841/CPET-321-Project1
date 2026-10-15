@@ -29,6 +29,8 @@ public:
 		//A return value of 1 means the requested reservation was not in the system
 	int DeleteReservation(int oldDate);//function that REMOVES a specific reservation. This will prooooobably just be called whenever the reservation is on a date that is lower than the current date. I think this would be best if it is just called automatically at the start of each day to clear unused space
 	
+	virtual std::string CarDetails() = 0;
+
 	virtual std::string InfoOut() = 0; //outputs information about the vehicle
 
 };

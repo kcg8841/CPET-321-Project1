@@ -14,6 +14,7 @@ public:
 	void SetCapacity(double newC);
 	void SetEfficiency(double newEff);
 	void SetType(std::string newType);
+	std::string CarDetails();
 	std::string InfoOut();
 };
 

@@ -19,6 +19,9 @@ std::string ElectricVehicle::GetType() {
 void ElectricVehicle::SetType(std::string newType) {
 	Type = newType; //this SHOULD always be "EV"
 }
+std::string ElectricVehicle::CarDetails() {
+	return GetColor() + ", Electric, " + std::to_string(GetYear()) + " " + GetMake() + " " + GetModel();
+}
 std::string ElectricVehicle::InfoOut() { //outputs specific information about the vehicle in string format
 	std::string Range = std::to_string(Capacity * Efficiency);
 	return "Propulsion Method: Electric\nRange: " + Range + "\nEfficency: " + std::to_string(Efficiency) + "\n";
