@@ -20,7 +20,7 @@ void GasVehicle::SetType(std::string newType) {
 	Type = newType; //this SHOULD always be "ICE"
 }
 std::string GasVehicle::CarDetails() {
-	return GetColor() + ", Gas Powered, " + std::to_string(GetYear()) + " " + GetMake() + " " + GetModel();
+	return GetColor() + ", Gas, " + std::to_string(GetYear()) + " " + GetMake() + " " + GetModel();
 }
 std::string GasVehicle::InfoOut() { //outputs specific information about the vehicle in string format
 	std::string Range = std::to_string(Capacity * Efficiency);
