@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
         char Command;
         // Prompt the user for the program option (search by Make, Model, Year, or
         //   or exit the program)
-        cout << "Welcome to the Car Reservation System!\n\nCurrent Selected Vehicle: " << ((selectedVehicleIndex == -1) ? "None\n" : db.getvehicle(selectedVehicleIndex)->CarDetails()) << endl;
+        cout << "Welcome to the Car Reservation System!\n\nCurrent Selected Vehicle: " << ((selectedVehicleIndex == -1) ? "None\n" : db.getvehicle(selectedVehicleIndex)->CarDetails()) << "\nCurrent Date: " << db.getdate() << endl;
         cout << "Select Action (? For Help) > ";
         cin >> Command;
 
@@ -151,7 +151,7 @@ int main(int argc, char* argv[]) {
                 cout << "Enter Year > ";
                 cin >> DesiredYear;
 
-                string returnstring = "Vehicle(s) of Year: " + DesiredYear + "\n";
+                string returnstring = "Vehicle(s) of Year: " + to_string(DesiredYear) + "\n";
 
                 int vehiclecount = 0;
 
@@ -300,39 +300,68 @@ int main(int argc, char* argv[]) {
         {
             if (selectedVehicleIndex == -1) cout << "No Selected Vehicle, Select a Vehicle Before Making a Reservation" << endl;
             else {
-
-                db.createreservation(selectedVehicleIndex)
+                int reservationdate;
+                cout << "What date would you like to reserve the vehicle for? > ";
+                cin >> reservationdate;
+                cout << endl;
+                int response = db.createreservation(selectedVehicleIndex, reservationdate);
+                switch (response) {
+                case -1:
+                    cout << "Invalid Selected Vehicle. Please Select Another Vehicle.\n";
+                    break;
+                case 0:
+                    cout << "Successfully Created Reservation for the Date of " << reservationdate << endl;
+                    break;
+                case 1:
+                    cout << "Reservation Failed. Vehicle Already Reserved for that Date.\n";
+                    break;
+                case 2:
+                    cout << "Reservation Failed. Maximum Vehicle Reservations Reached.\n";
+                    break;
+                case 3:
+                    cout << "Reservation Failed. Reservation Date Already Passed.\n";
+                    break;
+                default:
+                    cout << "Reservation Failed. Unknown Error.";
+                    break;
+                }
             }
             break;
         } // case 'o' or 'O'
-        case '3': // Search by Year
+        case 'R': // Search by Model
         {
-            // Prompt the user for the search criteria
-            string DesiredYear;
-            cout << "Enter Year > ";
-            cin >> DesiredYear;
-
-            string returnstring = "Vehicle(s) of Year: " + DesiredYear + "\n";
-
-            int vehiclecount = 0;
-
-            // Search the database
-            for (int i = 0; i < 20; i++) {
-                Vehicle* current = Database[i];
-                if (current == nullptr) continue;
-                if (current->getYear() == DesiredYear) {
-                    returnstring += "- " + current->DriveEfficiencyInfo() + "\n";
-                    vehiclecount++;
+            if (selectedVehicleIndex == -1) cout << "No Selected Vehicle, Select a Vehicle Before Removing a Reservation" << endl;
+            else {
+                int currentreservations[3] = *db.getvehicle(selectedVehicleIndex)->GetReservations();
+                cout << "Available Reservation date(s) to Remove: " << db.getvehicle(selectedVehicleIndex)->GetReservations()
+                int reservationdate;
+                cout << "What date would you like to remove the reservation for? > ";
+                cin >> reservationdate;
+                cout << endl;
+                int response = db.createreservation(selectedVehicleIndex, reservationdate);
+                switch (response) {
+                case -1:
+                    cout << "Invalid Selected Vehicle. Please Select Another Vehicle.\n";
+                    break;
+                case 0:
+                    cout << "Successfully Created Reservation for the Date of " << reservationdate << endl;
+                    break;
+                case 1:
+                    cout << "Reservation Failed. Vehicle Already Reserved for that Date.\n";
+                    break;
+                case 2:
+                    cout << "Reservation Failed. Maximum Vehicle Reservations Reached.\n";
+                    break;
+                case 3:
+                    cout << "Reservation Failed. Reservation Date Already Passed.\n";
+                    break;
+                default:
+                    cout << "Reservation Failed. Unknown Error.";
+                    break;
                 }
             }
-
-            if (vehiclecount == 0) returnstring += "- None\n";
-
-            // Print out matching entries
-            cout << returnstring << endl;
-
             break;
-        } // case 'y' or 'Y'
+        } // case 'o' or 'O'
         case '4': // Search by Color
         {
             // Prompt the user for the search criteria
@@ -376,7 +405,7 @@ int main(int argc, char* argv[]) {
             for (int i = 0; i < 20; i++) {
                 Vehicle* current = Database[i];
                 if (current == nullptr) continue;
-                if (current->getYear() == DesiredYear) {
+                if (current->GetYear() == DesiredYear) {
                     returnstring += "- " + current->DriveEfficiencyInfo() + "\n";
                     vehiclecount++;
                 }
