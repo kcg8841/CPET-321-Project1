@@ -30,7 +30,6 @@
   <ItemGroup>
     <ClCompile Include="ElectricVehicle.cpp" />
     <ClCompile Include="GasVehicle.cpp" />
-    <ClCompile Include="lab5main.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
