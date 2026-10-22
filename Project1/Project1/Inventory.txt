@@ -5,7 +5,7 @@ Subaru Crosstrek Chartreuse 2026 ICE 15.1 18.8
 Ford Explorer Blue 2027 ICE 17.9 18.3
 Subaru Outback Blue 2019 ICE 16.1 17.3
 Chevrolet Nova_SS Red 1974 ICE 11.5 2.6
-Ford Maverick 2026 Maroon ICE 13.8 38.1
+Ford Maverick Maroon 2026 ICE 13.8 38.1
 Nissan Leaf Red 2022 EV 100.5 3.1
 Pontiac TransAM Silver 1980 ICE 18.4 11.2
 Tesla Model_3 Maroon 2020 EV 32.2 3.3
