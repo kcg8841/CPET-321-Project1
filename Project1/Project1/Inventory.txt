@@ -1,13 +1,23 @@
-Chevrolet Silverado 2022 ICE 21.1 14.2
-Cadillac Lyriq 2027 EV 211.3 3.1
-Volkswagen e-Golf 2016 EV 19.7 4.2
-Subaru Crosstrek 2026 ICE 15.1 18.8
-Ford Explorer 2027 ICE 17.9 18.3
-Subaru Outback 2019 ICE 16.1 17.3
-Chevrolet Nova_SS 1974 ICE 11.5 2.6
-Ford Maverick 2026 ICE 13.8 38.1
-Nissan Leaf 2022 EV 100.5 3.1
-Pontiac TransAM 1980 ICE 18.4 11.2
-Tesla Model_3 2020 EV 32.2 3.3
-Buick Apollo 1974 ICE 28.4 13.1
-Subaru Legacy 2015 ICE 18.5 24.0
+Chevrolet Silverado Silver 2022 ICE 21.1 14.2
+Cadillac Lyriq Red 2027 EV 211.3 3.1
+Volkswagen e-Golf Pink 2016 EV 19.7 4.2
+Subaru Crosstrek Chartreuse 2026 ICE 15.1 18.8
+Ford Explorer Blue 2027 ICE 17.9 18.3
+Subaru Outback Blue 2019 ICE 16.1 17.3
+Chevrolet Nova_SS Red 1974 ICE 11.5 2.6
+Ford Maverick 2026 Maroon ICE 13.8 38.1
+Nissan Leaf Red 2022 EV 100.5 3.1
+Pontiac TransAM Silver 1980 ICE 18.4 11.2
+Tesla Model_3 Maroon 2020 EV 32.2 3.3
+Buick Apollo Red 1974 ICE 28.4 13.1
+Subaru Legacy Red 2015 ICE 18.5 24.0
+Tesla Roadster Silver 2028 EV 5.0 1.0
+Kia Optima Blue 2020 ICE 9.6 24.0
+Chevrolet El_Camino Black 1969 ICE 20.1 15.2
+Ford Model_T Black 1908 ICE 1.0 1.0
+BMW X5 Black 2021 ICE 24.0 21.0
+Honda Civic Black 2017 ICE 30.0 36.0
+Subaru Impreza Silver 2017 ICE 18.0 23.0
+Nissan Altima Silver 2021 ICE 16.4 31.2
+Honda Accord Black 2018 ICE 28.2 32.2
+Pininfarina Battista Yellow 2026 EV 90.0 1.0
