@@ -10,6 +10,8 @@ int main(int argc, char* argv[]) {
 
 	string filename = "Inventory.txt";
 
+    bool ExitRequested = false;
+
 	db.importcars(filename);
 
     int selectedVehicleIndex = -1;
@@ -44,7 +46,7 @@ int main(int argc, char* argv[]) {
             cout << " 5 = Search by Propulsion Type" << endl;
             cout << " A = Advance Date by One" << endl;
             cout << " Q = Quit / Exit the program" << endl;*/
-        case 'S':
+        case 's': case 'S':
             char SelectCommand;
             cout << endl << " 1 = Search by Make" << endl;
             cout << " 2 = Search by Model" << endl;
@@ -287,7 +289,7 @@ int main(int argc, char* argv[]) {
             }
             break;
              // case 'y' or 'Y'
-        case 'D': // Search by Make
+        case 'd': case 'D': // Search by Make
         {
             if (selectedVehicleIndex == -1) cout << "No Selected Vehicle to Deselect" << endl;
             else {
@@ -296,7 +298,7 @@ int main(int argc, char* argv[]) {
             }
             break;
         } // case 'a' or 'A'
-        case 'C': // Search by Model
+        case 'c': case 'C': // Search by Model
         {
             if (selectedVehicleIndex == -1) cout << "No Selected Vehicle, Select a Vehicle Before Making a Reservation" << endl;
             else {
@@ -328,94 +330,38 @@ int main(int argc, char* argv[]) {
             }
             break;
         } // case 'o' or 'O'
-        case 'R': // Search by Model
+        case 'r': case 'R': // Search by Model
         {
             if (selectedVehicleIndex == -1) cout << "No Selected Vehicle, Select a Vehicle Before Removing a Reservation" << endl;
             else {
-                int currentreservations[3] = *db.getvehicle(selectedVehicleIndex)->GetReservations();
-                cout << "Available Reservation date(s) to Remove: " << db.getvehicle(selectedVehicleIndex)->GetReservations()
+                int* currentreservations = db.getvehicle(selectedVehicleIndex)->GetReservations();
+                cout << "Available Reservation Date(s) to Remove: " << currentreservations[0] << ", " << currentreservations[1] << ", " << currentreservations[2] << ".\n";
                 int reservationdate;
-                cout << "What date would you like to remove the reservation for? > ";
+                cout << "Which date would you like to remove the reservation for? > ";
                 cin >> reservationdate;
                 cout << endl;
-                int response = db.createreservation(selectedVehicleIndex, reservationdate);
+                int response = db.deletereservation(selectedVehicleIndex, reservationdate);
                 switch (response) {
                 case -1:
                     cout << "Invalid Selected Vehicle. Please Select Another Vehicle.\n";
                     break;
                 case 0:
-                    cout << "Successfully Created Reservation for the Date of " << reservationdate << endl;
+                    cout << "Successfully Removed Reservation for the Date of " << reservationdate << endl;
                     break;
                 case 1:
-                    cout << "Reservation Failed. Vehicle Already Reserved for that Date.\n";
-                    break;
-                case 2:
-                    cout << "Reservation Failed. Maximum Vehicle Reservations Reached.\n";
-                    break;
-                case 3:
-                    cout << "Reservation Failed. Reservation Date Already Passed.\n";
+                    cout << "Reservation Removal Failed. No Existing Registration on That Date.\n";
                     break;
                 default:
-                    cout << "Reservation Failed. Unknown Error.";
+                    cout << "Reservation Removal Failed. Unknown Error.";
                     break;
                 }
             }
             break;
         } // case 'o' or 'O'
-        case '4': // Search by Color
+        case 'a': case 'A': // Search by Color
         {
-            // Prompt the user for the search criteria
-            string DesiredYear;
-            cout << "Enter Year > ";
-            cin >> DesiredYear;
-
-            string returnstring = "Vehicle(s) of Year: " + DesiredYear + "\n";
-
-            int vehiclecount = 0;
-
-            // Search the database
-            for (int i = 0; i < 20; i++) {
-                Vehicle* current = Database[i];
-                if (current == nullptr) continue;
-                if (current->getYear() == DesiredYear) {
-                    returnstring += "- " + current->DriveEfficiencyInfo() + "\n";
-                    vehiclecount++;
-                }
-            }
-
-            if (vehiclecount == 0) returnstring += "- None\n";
-
-            // Print out matching entries
-            cout << returnstring << endl;
-
-            break;
-        } // case 'y' or 'Y'
-        case '5': // Search by Propulsion Type
-        {
-            // Prompt the user for the search criteria
-            string DesiredYear;
-            cout << "Enter Year > ";
-            cin >> DesiredYear;
-
-            string returnstring = "Vehicle(s) of Year: " + DesiredYear + "\n";
-
-            int vehiclecount = 0;
-
-            // Search the database
-            for (int i = 0; i < 20; i++) {
-                Vehicle* current = Database[i];
-                if (current == nullptr) continue;
-                if (current->GetYear() == DesiredYear) {
-                    returnstring += "- " + current->DriveEfficiencyInfo() + "\n";
-                    vehiclecount++;
-                }
-            }
-
-            if (vehiclecount == 0) returnstring += "- None\n";
-
-            // Print out matching entries
-            cout << returnstring << endl;
-
+            cout << "Advanced Date from " << db.getdate() << " to " << db.getdate() + 1 << ".\n";
+            db.advancedate();
             break;
         } // case 'y' or 'Y'
         case 'q': case 'Q': // Exit the program
