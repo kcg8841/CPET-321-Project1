@@ -12,7 +12,6 @@ private:
 
 public:
 	Database();
-	~Database(); // deletes the vehicles
 
 	// File format: Make Model Color Year Type Capacity Efficiency (Type is ICE or EV)
 	// Returns number of vehicles imported, -1 = can't open file, -2 = bad line, -3 = bad type
