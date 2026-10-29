@@ -98,10 +98,10 @@ int main(int argc, char* argv[]) {
                     // Verify user selection
                     if (vehicleselection <= vehiclecount) {
                         selectedVehicleIndex = matchedVehicles[vehicleselection - 1];
-                        cout << "Successfully Selected " << vehicleselection << ": " << db.getvehicle(selectedVehicleIndex)->CarDetails() << endl;
+                        cout << "\nSuccessfully Selected " << vehicleselection << ": " << db.getvehicle(selectedVehicleIndex)->CarDetails() << endl;
                     }
                     else {
-                        cout << "Invalid Selection" << endl;
+                        cout << "\nInvalid Selection" << endl;
                     }
                 }
                 // Print out matching entries
@@ -424,7 +424,7 @@ int main(int argc, char* argv[]) {
                 // If a match is found, add to list of matched vehicles and append text to output string
                 vehiclecount++;
                 matchedVehicles.push_back(i);
-                returnstring += to_string(vehiclecount) + ") " + current->CarDetails() + " " + current->InfoOut() + "\n";
+                returnstring += to_string(i+1) + ") " + current->CarDetails() + " " + current->InfoOut() + "\n";
             }
 
             cout << returnstring;
@@ -454,7 +454,7 @@ int main(int argc, char* argv[]) {
                 if (currentreservations[0] != 0 || currentreservations[1] != 0 || currentreservations[2] != 0) {
                     vehiclecount++;
                     matchedVehicles.push_back(i);
-                    returnstring += to_string(vehiclecount) + ") " + current->CarDetails() + " " + current->InfoOut() + "\n";
+                    returnstring += to_string(i+1) + ") " + current->CarDetails() + " " + current->InfoOut() + "Current Reservations: " + to_string(currentreservations[0]) + ", " + to_string(currentreservations[1]) + ", " + to_string(currentreservations[2]) + ".\n\n";
                 }
             }
 
@@ -486,7 +486,7 @@ int main(int argc, char* argv[]) {
                 if (currentreservations[0] == 0 && currentreservations[1] == 0 && currentreservations[2] == 0) {
                     vehiclecount++;
                     matchedVehicles.push_back(i);
-                    returnstring += to_string(vehiclecount) + ") " + current->CarDetails() + " " + current->InfoOut() + "\n";
+                    returnstring += to_string(i+1) + ") " + current->CarDetails() + " " + current->InfoOut() + "\n";
                 }
             }
 
@@ -496,7 +496,7 @@ int main(int argc, char* argv[]) {
         } // case 'h' or 'H'
         case 'a': case 'A': // Advance Date
         {
-            cout << "Advanced Date from " << db.getdate() << " to " << db.getdate() + 1 << ".\n";
+            cout << "\nAdvanced Date from " << db.getdate() << " to " << db.getdate() + 1 << ".\n";
             // Advance Date Within the Database
             db.advancedate();
             break;
