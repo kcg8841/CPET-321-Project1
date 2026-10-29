@@ -35,6 +35,9 @@ int main(int argc, char* argv[]) {
         case '?': // Help screen
         {
             cout << " ? = Display Help" << endl;
+            cout << " I = Display All Vehicles" << endl;
+            cout << " W = Display All Reserved Vehicles" << endl;
+            cout << " O = Display All Open Vehicles" << endl;
             cout << " S = Select Vehicle" << endl;
             cout << " D = Deselect Vehicle" << endl;
             cout << " C = Create Reservation" << endl;
@@ -121,7 +124,7 @@ int main(int argc, char* argv[]) {
                 vector<int> matchedVehicles;
 
                 // Search the database
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < 50; i++) {
                     current = db.getvehicle(i);
                     if (current == nullptr) continue;
                     // If a match is found, add to list of matched vehicles and append text to output string
@@ -170,7 +173,7 @@ int main(int argc, char* argv[]) {
                 vector<int> matchedVehicles;
 
                 // Search the database
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < 50; i++) {
                     current = db.getvehicle(i);
                     if (current == nullptr) continue;
                     // If a match is found, add to list of matched vehicles and append text to output string
@@ -219,7 +222,7 @@ int main(int argc, char* argv[]) {
                 vector<int> matchedVehicles;
 
                 // Search the database
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < 50; i++) {
                     current = db.getvehicle(i);
                     if (current == nullptr) continue;
                     // If a match is found, add to list of matched vehicles and append text to output string
@@ -268,7 +271,7 @@ int main(int argc, char* argv[]) {
                 vector<int> matchedVehicles;
 
                 // Search the database
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < 50; i++) {
                     current = db.getvehicle(i);
                     if (current == nullptr) continue;
                     // If a match is found, add to list of matched vehicles and append text to output string
@@ -402,6 +405,93 @@ int main(int argc, char* argv[]) {
                 int* currentreservations = db.getvehicle(selectedVehicleIndex)->GetReservations();
                 cout << "Current Vehicle Reservations: " << currentreservations[0] << ", " << currentreservations[1] << ", " << currentreservations[2] << ".\n";
             }
+            break;
+        } // case 'h' or 'H'
+        case 'i': case 'I': // Check Reservations
+        {
+            string returnstring = "All Vehicles:\n";
+
+            int vehiclecount = 0;
+
+            Vehicle* current;
+
+            vector<int> matchedVehicles;
+
+            // Search the database
+            for (int i = 0; i < 50; i++) {
+                current = db.getvehicle(i);
+                if (current == nullptr) continue;
+                // If a match is found, add to list of matched vehicles and append text to output string
+                vehiclecount++;
+                matchedVehicles.push_back(i);
+                returnstring += to_string(vehiclecount) + ") " + current->CarDetails() + " " + current->InfoOut() + "\n";
+            }
+
+            cout << returnstring;
+            break;
+        } // case 'h' or 'H'
+        case 'w': case 'W': // Check Reservations
+        {
+            string returnstring = "All Reserved Vehicles:\n";
+
+            int vehiclecount = 0;
+
+            Vehicle* current;
+
+            int* currentreservations;
+
+            int* blank = new int[3];
+       
+
+            vector<int> matchedVehicles;
+
+            // Search the database
+            for (int i = 0; i < 50; i++) {
+                current = db.getvehicle(i);
+                currentreservations = current->GetReservations();
+                if (current == nullptr) continue;
+                // If a match is found, add to list of matched vehicles and append text to output string
+                if (currentreservations[0] != 0 || currentreservations[1] != 0 || currentreservations[2] != 0) {
+                    vehiclecount++;
+                    matchedVehicles.push_back(i);
+                    returnstring += to_string(vehiclecount) + ") " + current->CarDetails() + " " + current->InfoOut() + "\n";
+                }
+            }
+
+            cout << returnstring;
+
+            break;
+        } // case 'h' or 'H'
+        case 'o': case 'O': // Check Reservations
+        {
+            string returnstring = "All Open Vehicles:\n";
+
+            int vehiclecount = 0;
+
+            Vehicle* current;
+
+            int* currentreservations;
+
+            int* blank = new int[3];
+
+
+            vector<int> matchedVehicles;
+
+            // Search the database
+            for (int i = 0; i < 50; i++) {
+                current = db.getvehicle(i);
+                currentreservations = current->GetReservations();
+                if (current == nullptr) continue;
+                // If a match is found, add to list of matched vehicles and append text to output string
+                if (currentreservations[0] == 0 && currentreservations[1] == 0 && currentreservations[2] == 0) {
+                    vehiclecount++;
+                    matchedVehicles.push_back(i);
+                    returnstring += to_string(vehiclecount) + ") " + current->CarDetails() + " " + current->InfoOut() + "\n";
+                }
+            }
+
+            cout << returnstring;
+
             break;
         } // case 'h' or 'H'
         case 'a': case 'A': // Advance Date
