@@ -51,14 +51,68 @@ int main(int argc, char* argv[]) {
         {
             // Prompt for Search Method
             char SelectCommand;
-            cout << endl << " 1 = Search by Make" << endl;
+            cout << endl << " I = Search by Index" << endl;
+            cout << " 1 = Search by Make" << endl;
             cout << " 2 = Search by Model" << endl;
             cout << " 3 = Search by Year" << endl;
             cout << " 4 = Search by Color" << endl;
-            cout << " 5 = Search by Propulsion Type" << endl;
+            cout << " 5 = Search by Propulsion Type" << endl << endl;
             cout << "Select Action > ";
             cin >> SelectCommand;
             switch (SelectCommand) {
+            case 'I': case 'i': // Search by Make
+            {
+                // Prompt the user for the search criteria
+                int DesiredIndex;
+                cout << "Enter Desired Index > ";
+                cin >> DesiredIndex;
+
+                string returnstring = "Vehicle at Index: " + to_string(DesiredIndex) + "\n";
+
+                int vehiclecount = 0;
+
+                Vehicle* current;
+
+                vector<int> matchedVehicles;
+
+                // Search the database
+                for (int i = 0; i < 50; i++) {
+                    current = db.getvehicle(i);
+                    if (current == nullptr) continue;
+                    // If a match is found, add to list of matched vehicles and append text to output string
+                    if (i == (DesiredIndex - 1)) {
+                        vehiclecount++;
+                        matchedVehicles.push_back(i);
+                        returnstring += to_string(vehiclecount) + ") " + current->CarDetails() + " " + current->InfoOut() + "\n";
+                    }
+                }
+                
+
+                // Print out vehicles to select
+                if (vehiclecount == 0) cout << returnstring + "- None\n";
+                else {
+                    // Get user selection
+                    char vehicleselection;
+                    cout << returnstring;
+                    cout << "Is this the vehicle you wish to select (Y/N)? > ";
+                    cin >> vehicleselection;
+
+                    // Verify user selection
+                    if (vehicleselection == 'Y' || vehicleselection == 'y') {
+                        selectedVehicleIndex = matchedVehicles[vehicleselection - 1];
+                        cout << "\nSuccessfully Selected " << vehicleselection << ": " << db.getvehicle(selectedVehicleIndex)->CarDetails() << endl;
+                    }
+                    else if (vehicleselection == 'N' || vehicleselection == 'n') {
+                        cout << "\nNo Vehicle Selected." << endl;
+                    }
+                    else {
+                        cout << "\nInvalid Input. No Vehicle Selected." << endl;
+                    }
+                }
+                // Print out matching entries
+
+                break;
+            } // case '1'
             case '1': // Search by Make
             {
                 // Prompt the user for the search criteria
