@@ -6,21 +6,26 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
+    // Create Database
 	Database db;
 
+    // Car Inventory File
 	string filename = "Inventory.txt";
 
     bool ExitRequested = false;
 
+    // Fill Database
 	db.importcars(filename);
 
     int selectedVehicleIndex = -1;
 
+    cout << "Welcome to the Car Reservation System!\n\n";
+
+    // Execution Loop
     do {
         char Command;
-        // Prompt the user for the program option (search by Make, Model, Year, or
-        //   or exit the program)
-        cout << "Welcome to the Car Reservation System!\n\nCurrent Selected Vehicle: " << ((selectedVehicleIndex == -1) ? "None\n" : db.getvehicle(selectedVehicleIndex)->CarDetails()) << "\nCurrent Date: " << db.getdate() << endl;
+        // Prompt the user for the program option (Help, Select, Deselect, Create, Check, Remove, Advance, or Quit)
+        cout << "Current Selected Vehicle : " << ((selectedVehicleIndex == -1) ? "None" : (db.getvehicle(selectedVehicleIndex)->CarDetails())) << "\nCurrent Date : " << db.getdate() << "\n\nOptions: Select, Deselect, Create, Check, Remove, Advance\n";
         cout << "Select Action (? For Help) > ";
         cin >> Command;
 
@@ -33,20 +38,15 @@ int main(int argc, char* argv[]) {
             cout << " S = Select Vehicle" << endl;
             cout << " D = Deselect Vehicle" << endl;
             cout << " C = Create Reservation" << endl;
+            cout << " H = Check Reservation" << endl;
             cout << " R = Remove Reservation" << endl;
             cout << " A = Advance Date" << endl;
             cout << " Q = Quit / Exit the program" << endl;
             break;
         } // Case '?'
-        /*            cout << " ? = Display Help" << endl;
-            cout << " 1 = Search by Make" << endl;
-            cout << " 2 = Search by Model" << endl;
-            cout << " 3 = Search by Year" << endl;
-            cout << " 4 = Search by Color" << endl;
-            cout << " 5 = Search by Propulsion Type" << endl;
-            cout << " A = Advance Date by One" << endl;
-            cout << " Q = Quit / Exit the program" << endl;*/
-        case 's': case 'S':
+        case 's': case 'S': // Select Vehicle
+        {
+            // Prompt for Search Method
             char SelectCommand;
             cout << endl << " 1 = Search by Make" << endl;
             cout << " 2 = Search by Model" << endl;
@@ -75,6 +75,7 @@ int main(int argc, char* argv[]) {
                 for (int i = 0; i < 50; i++) {
                     current = db.getvehicle(i);
                     if (current == nullptr) continue;
+                    // If a match is found, add to list of matched vehicles and append text to output string
                     if (current->GetMake() == DesiredMake) {
                         vehiclecount++;
                         matchedVehicles.push_back(i);
@@ -82,13 +83,16 @@ int main(int argc, char* argv[]) {
                     }
                 }
 
+                // Print out vehicles to select
                 if (vehiclecount == 0) cout << returnstring + "- None\n";
                 else {
+                    // Get user selection
                     int vehicleselection;
                     cout << returnstring << endl;
                     cout << "Select Vehicle Between 1-" << vehiclecount << " > ";
                     cin >> vehicleselection;
 
+                    // Verify user selection
                     if (vehicleselection <= vehiclecount) {
                         selectedVehicleIndex = matchedVehicles[vehicleselection - 1];
                         cout << "Successfully Selected " << vehicleselection << ": " << db.getvehicle(selectedVehicleIndex)->CarDetails() << endl;
@@ -100,7 +104,7 @@ int main(int argc, char* argv[]) {
                 // Print out matching entries
 
                 break;
-            } // case 'a' or 'A'
+            } // case '1'
             case '2': // Search by Model
             {
                 // Prompt the user for the search criteria
@@ -120,6 +124,7 @@ int main(int argc, char* argv[]) {
                 for (int i = 0; i < 20; i++) {
                     current = db.getvehicle(i);
                     if (current == nullptr) continue;
+                    // If a match is found, add to list of matched vehicles and append text to output string
                     if (current->GetModel() == DesiredModel) {
                         vehiclecount++;
                         matchedVehicles.push_back(i);
@@ -127,13 +132,16 @@ int main(int argc, char* argv[]) {
                     }
                 }
 
+                // Print out vehicles to select
                 if (vehiclecount == 0) cout << returnstring + "- None\n";
                 else {
+                    // Get user selection
                     int vehicleselection;
                     cout << returnstring << endl;
                     cout << "Select Vehicle Between 1-" << vehiclecount << " > ";
                     cin >> vehicleselection;
 
+                    // Verify user selection
                     if (vehicleselection <= vehiclecount) {
                         selectedVehicleIndex = matchedVehicles[vehicleselection - 1];
                         cout << "Successfully Selected " << vehicleselection << ": " << db.getvehicle(selectedVehicleIndex)->CarDetails() << endl;
@@ -145,7 +153,7 @@ int main(int argc, char* argv[]) {
                 // Print out matching entries
 
                 break;
-            } // case 'o' or 'O'
+            } // case '2'
             case '3': // Search by Year
             {
                 // Prompt the user for the search criteria
@@ -165,6 +173,7 @@ int main(int argc, char* argv[]) {
                 for (int i = 0; i < 20; i++) {
                     current = db.getvehicle(i);
                     if (current == nullptr) continue;
+                    // If a match is found, add to list of matched vehicles and append text to output string
                     if (current->GetYear() == DesiredYear) {
                         vehiclecount++;
                         matchedVehicles.push_back(i);
@@ -172,13 +181,16 @@ int main(int argc, char* argv[]) {
                     }
                 }
 
+                // Print out vehicles to select
                 if (vehiclecount == 0) cout << returnstring + "- None\n";
                 else {
+                    // Get user selection
                     int vehicleselection;
                     cout << returnstring << endl;
                     cout << "Select Vehicle Between 1-" << vehiclecount << " > ";
                     cin >> vehicleselection;
 
+                    // Verify user selection
                     if (vehicleselection <= vehiclecount) {
                         selectedVehicleIndex = matchedVehicles[vehicleselection - 1];
                         cout << "Successfully Selected " << vehicleselection << ": " << db.getvehicle(selectedVehicleIndex)->CarDetails() << endl;
@@ -190,7 +202,7 @@ int main(int argc, char* argv[]) {
                 // Print out matching entries
 
                 break;
-            } // case 'y' or 'Y'
+            } // case '3'
             case '4': // Search by Color
             {
                 // Prompt the user for the search criteria
@@ -210,6 +222,7 @@ int main(int argc, char* argv[]) {
                 for (int i = 0; i < 20; i++) {
                     current = db.getvehicle(i);
                     if (current == nullptr) continue;
+                    // If a match is found, add to list of matched vehicles and append text to output string
                     if (current->GetColor() == DesiredColor) {
                         vehiclecount++;
                         matchedVehicles.push_back(i);
@@ -217,13 +230,16 @@ int main(int argc, char* argv[]) {
                     }
                 }
 
+                // Print out vehicles to select
                 if (vehiclecount == 0) cout << returnstring + "- None\n";
                 else {
+                    // Get user selection
                     int vehicleselection;
                     cout << returnstring << endl;
                     cout << "Select Vehicle Between 1-" << vehiclecount << " > ";
                     cin >> vehicleselection;
 
+                    // Verify user selection
                     if (vehicleselection <= vehiclecount) {
                         selectedVehicleIndex = matchedVehicles[vehicleselection - 1];
                         cout << "Successfully Selected " << vehicleselection << ": " << db.getvehicle(selectedVehicleIndex)->CarDetails() << endl;
@@ -235,7 +251,7 @@ int main(int argc, char* argv[]) {
                 // Print out matching entries
 
                 break;
-            } // case 'y' or 'Y'
+            } // case '4'
             case '5': // Search by Propulsion Type
             {
                 // Prompt the user for the search criteria
@@ -255,6 +271,7 @@ int main(int argc, char* argv[]) {
                 for (int i = 0; i < 20; i++) {
                     current = db.getvehicle(i);
                     if (current == nullptr) continue;
+                    // If a match is found, add to list of matched vehicles and append text to output string
                     if (current->InfoOut().at(19) == DesiredPropulsion.front()) {
                         vehiclecount++;
                         matchedVehicles.push_back(i);
@@ -262,13 +279,16 @@ int main(int argc, char* argv[]) {
                     }
                 }
 
+                // Print out vehicles to select
                 if (vehiclecount == 0) cout << returnstring + "- None\n";
                 else {
+                    // Get user selection
                     int vehicleselection;
                     cout << returnstring << endl;
                     cout << "Select Vehicle Between 1-" << vehiclecount << " > ";
                     cin >> vehicleselection;
 
+                    // Verify user selection
                     if (vehicleselection <= vehiclecount) {
                         selectedVehicleIndex = matchedVehicles[vehicleselection - 1];
                         cout << "Successfully Selected " << vehicleselection << ": " << db.getvehicle(selectedVehicleIndex)->CarDetails() << endl;
@@ -288,25 +308,33 @@ int main(int argc, char* argv[]) {
             }
             }
             break;
-             // case 'y' or 'Y'
-        case 'd': case 'D': // Search by Make
+        } // case '5'
+        case 'd': case 'D': // Deselect Vehicle
         {
+            // Skip if no selected vehicle
             if (selectedVehicleIndex == -1) cout << "No Selected Vehicle to Deselect" << endl;
             else {
                 cout << "Successfully Deselected " << db.getvehicle(selectedVehicleIndex)->CarDetails() << endl;
+                // Deselect vehicle (remove index)
                 selectedVehicleIndex = -1;
             }
             break;
-        } // case 'a' or 'A'
-        case 'c': case 'C': // Search by Model
+        } // case 'd' or 'D'
+        case 'c': case 'C': // Create Reservation
         {
+            // Skip if there is no selected vehicle
             if (selectedVehicleIndex == -1) cout << "No Selected Vehicle, Select a Vehicle Before Making a Reservation" << endl;
             else {
+                // Get user input for which date to reserve for
                 int reservationdate;
                 cout << "What date would you like to reserve the vehicle for? > ";
                 cin >> reservationdate;
                 cout << endl;
+
+                // Attempt to reserve vehicle
                 int response = db.createreservation(selectedVehicleIndex, reservationdate);
+
+                // Give error message corresponding to reservation success
                 switch (response) {
                 case -1:
                     cout << "Invalid Selected Vehicle. Please Select Another Vehicle.\n";
@@ -329,18 +357,25 @@ int main(int argc, char* argv[]) {
                 }
             }
             break;
-        } // case 'o' or 'O'
-        case 'r': case 'R': // Search by Model
+        } // case 'c' or 'C'
+        case 'r': case 'R': // Remove Reservation
         {
+            // Skip if there is no selected vehicle
             if (selectedVehicleIndex == -1) cout << "No Selected Vehicle, Select a Vehicle Before Removing a Reservation" << endl;
             else {
+                // Get current reservations and display to user
                 int* currentreservations = db.getvehicle(selectedVehicleIndex)->GetReservations();
                 cout << "Available Reservation Date(s) to Remove: " << currentreservations[0] << ", " << currentreservations[1] << ", " << currentreservations[2] << ".\n";
+                
+                // Get user selection for reservation to delete
                 int reservationdate;
                 cout << "Which date would you like to remove the reservation for? > ";
                 cin >> reservationdate;
                 cout << endl;
+                // Attempt to remove reservation
                 int response = db.deletereservation(selectedVehicleIndex, reservationdate);
+
+                // Give error message depending on removal success
                 switch (response) {
                 case -1:
                     cout << "Invalid Selected Vehicle. Please Select Another Vehicle.\n";
@@ -357,13 +392,25 @@ int main(int argc, char* argv[]) {
                 }
             }
             break;
-        } // case 'o' or 'O'
-        case 'a': case 'A': // Search by Color
+        } // case 'r' or 'R'
+        case 'h': case 'H': // Check Reservations
+        {
+            // Skip if there is no current selected vehicle
+            if (selectedVehicleIndex == -1) cout << "No Selected Vehicle, Select a Vehicle Before Checking a Reservation" << endl;
+            else {
+                // Get the current vehicle, and then get the reservations from that vehicle
+                int* currentreservations = db.getvehicle(selectedVehicleIndex)->GetReservations();
+                cout << "Current Vehicle Reservations: " << currentreservations[0] << ", " << currentreservations[1] << ", " << currentreservations[2] << ".\n";
+            }
+            break;
+        } // case 'h' or 'H'
+        case 'a': case 'A': // Advance Date
         {
             cout << "Advanced Date from " << db.getdate() << " to " << db.getdate() + 1 << ".\n";
+            // Advance Date Within the Database
             db.advancedate();
             break;
-        } // case 'y' or 'Y'
+        } // case 'a' or 'A'
         case 'q': case 'Q': // Exit the program
         {
             ExitRequested = true;
@@ -371,6 +418,8 @@ int main(int argc, char* argv[]) {
         } // case 'q' or 'Q'
        // "otherwise" is not needed, any other command is ignored
         } // switch()
+
+        cout << endl << endl << "-----------------------------------------\n";
 
     } while (!ExitRequested);
 }
